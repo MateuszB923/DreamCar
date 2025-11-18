@@ -1,0 +1,35 @@
+.background {
+    background: url("../../images/benz.jpg") center 60% / cover no-repeat;
+}
+
+.car-photo {
+    margin-top: -2rem;
+}
+
+.car-photo img {
+    object-position: center 60%;
+}
+
+.display-menu a {
+    color: #aaaaaa;
+}
+
+@media (max-width: 1200px) {
+    .car-photo {
+        margin-top: 0.2rem;
+    }
+    .availability p {
+        font-size: 2.6rem;
+
+    }
+}
+
+@media (max-width: 900px) {
+    .car-photo {
+        margin-top: 0.2rem;
+    }
+    .availability p {
+        font-size: 2rem;
+
+    }
+}

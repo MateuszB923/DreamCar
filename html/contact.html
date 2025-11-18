@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/font.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/contact.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <title>Kontakt</title>
+</head>
+
+<body>
+
+<nav>
+    <div class="display-menu">
+        <h1><a href="./index.html">Menu</a></h1>
+        <h1><a href="./offer.html" >Oferta</a></h1>
+        <h1><a href="./about_us.html">O nas</a></h1>
+        <h1><a href="./contact.html" class="active">Kontakt</a></h1>
+    </div>
+</nav>
+
+<main>
+    <h1 class="contact-header">Umów się i <br><span>spełnij swoje marzenia!</span></h1>
+
+    <div class="contact-container">
+        <form class="contact-form">
+            <h2>Nasz formularz kontaktowy</h2>
+            <input type="text" placeholder="Imię i nazwisko" required />
+            <input type="email" placeholder="Adres e-mail" required />
+            <input type="text" placeholder="Temat" required />
+            <textarea placeholder="Wpisz wiadomość" required></textarea>
+            <button type="submit">Wyślij</button>
+        </form>
+
+        <div class="map-box">
+            <iframe
+                    id="gmap_canvas"
+                    src="https://maps.google.com/maps?hl=pl&amp;q=Prof.%20Stanis%C5%82awa%20%C5%81ojaciewicza%2011%20Krak%C3%B3w&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                    allowfullscreen=""
+                    loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</main>
+
+<section class="contact-info">
+    <div class="info-item">
+        <i class="fa-solid fa-phone"></i>
+<!--        do zmiany nazwa fasolid-->
+        <p><strong>Telefon:</strong> 515 676 878</p>
+    </div>
+    <div class="info-item">
+        <i class="fa-solid fa-envelope"></i>
+        <p><strong>E-mail:</strong> dreamcar@kontakt.pl</p>
+    </div>
+    <div class="info-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <p><strong>Adres:</strong> Kraków, ul. Szerzyńska 55</p>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="contact-benefits">
+    <h2>Dlaczego warto się z nami? skontaktować </h2>
+    <div class="benefit-cards">
+        <div class="benefit">
+            <i class="fa-solid fa-car"></i>
+            <p>Pewne i luksusowe samochody</p>
+        </div>
+        <div class="benefit">
+            <i class="fa-solid fa-clock"></i>
+            <p>24/7 dostępność i szybka rezerwacja</p>
+        </div>
+        <div class="benefit">
+            <i class="fa-solid fa-star"></i>
+            <p>Gwarancja jakości i niezawodności</p>
+        </div>
+    </div>
+</section>
+
+<div class="mini-banner">
+    <p>Twoje marzenia. Nasza pasja. <span>DREAMCAR</span></p>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-column footer-left">
+            <h2 class="footer-logo">DREAMCAR</h2>
+            <p><strong>Adres:</strong> Kraków, ul. Szerzyńska 55</p>
+            <p><strong>Telefon:</strong> 515 676 878</p>
+            <p><strong>E-mail:</strong> dreamcar@kontakt.pl</p>
+        </div>
+
+        <div class="footer-column footer-nav">
+            <h3>Menu</h3>
+            <a href=".">Strona główna</a>
+            <a href="./offer.html">Oferta</a>
+            <a href="./about_us.html">O nas</a>
+            <a href="./contact.html">Kontakt</a>
+        </div>
+
+        <div class="footer-column newsletter">
+            <h3>Newsletter</h3>
+            <p>Wpisz swój adres e-mail aby otrzymywać informacje o wydarzeniach!</p>
+            <form class="newsletter-form" action="./contact.html">
+                <input type="email" placeholder="Twój e-mail" required />
+                <button type="submit">Zapisz się</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DREAMCAR | Wszystkie prawa zastrzeżone</p>
+    </div>
+</footer>
+
+</body>
+</html>

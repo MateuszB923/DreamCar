@@ -1,0 +1,17 @@
+.background {
+    background: url("../../images/audi.jpg") center 60% / cover no-repeat;
+}
+
+.car-photo {
+    margin-top: -2rem;
+}
+
+.car-photo img {
+    object-position: center 60%;
+}
+
+@media (max-width: 1200px) {
+    .car-photo {
+        margin-top: 0.2rem;
+    }
+}

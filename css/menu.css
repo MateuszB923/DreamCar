@@ -1,0 +1,180 @@
+.background {
+    background-image: url("../images/astonnn.jpg");
+}
+
+.hero-content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    backdrop-filter: blur(5px);
+    border-radius: 1.5rem;
+    padding: 2rem 3rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 2;
+    animation: fadeInHero 1.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInHero {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-title {
+    font-family: 'Benne', serif;
+    font-size: clamp(4rem, 8vw, 9.5rem);
+    color: white;
+    letter-spacing: 0.2rem;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    margin-bottom: 0.5rem;
+}
+
+.description_box p {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.offer-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    background: #e63946;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05rem;
+    text-decoration: none;
+    border-radius: 2rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.offer-button:hover {
+    background: #ff4c4c;
+    transform: scale(1.07);
+    animation: pulse 2s infinite;
+}
+
+main:has(.offer-button:hover) .background {
+    filter: blur(4px);
+    transition: filter 0.7s ease;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px #e63946; }
+    50% { box-shadow: 0 0 50px #ff4c4c; }
+}
+
+.steps {
+    background: linear-gradient(to bottom, #121212, #0a0a0a);
+    color: white;
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    border-top: 1px solid #e63946;
+    border-bottom: 1px solid #e63946;
+    margin-bottom: -2rem;
+}
+
+.steps h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: #e63946;
+    margin-bottom: 4rem;
+    margin-top: -2rem;
+    letter-spacing: 0.1rem;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 2rem;
+    position: relative;
+}
+
+.step {
+    background: rgba(255,255,255,0.05);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 280px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.step:hover {
+    box-shadow: 0 0 30px rgba(230,57,70,0.5);
+}
+
+.icon {
+    font-size: 3rem;
+    color: #e63946;
+    margin-bottom: 1rem;
+}
+
+.step h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.step p {
+    font-size: 1rem;
+    color: #ddd;
+    line-height: 1.5rem;
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.step {
+    animation: fadeInUp 1s ease forwards;
+}
+.step:nth-child(1) { animation-delay: 0.2s; }
+.step:nth-child(2) { animation-delay: 0.2s; }
+.step:nth-child(3) { animation-delay: 0.2s; }
+
+.step-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.step {
+    cursor: pointer;
+}
+
+.reviews {
+    background: rgba(255,255,255,0.05);
+    padding: 3rem;
+    margin-bottom: -1rem;
+    text-align: center;
+}
+.reviews h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: #e63946;
+    margin-bottom: 2rem;
+}
+.review p {
+    font-size: 2rem;
+    color: #f0f0f0;
+    font-style: italic;
+}
+.review span {
+    color: #aaa;
+    font-size: 1.1rem;
+}

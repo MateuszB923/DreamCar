@@ -1,0 +1,11 @@
+.background {
+    background: url("../../images/porsche.jpg") center 60% / cover no-repeat;
+}
+
+.car-photo {
+    margin-top: -2rem;
+}
+
+.car-photo img {
+    object-position: center 60%;
+}
