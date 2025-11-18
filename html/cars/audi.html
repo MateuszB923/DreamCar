@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/font.css" />
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/footer.css" />
+    <link rel="stylesheet" href="../../css/cars.css" />
+    <link rel="stylesheet" href="../../css/individual_cars/audi.css" />
+
+    <title>Audi</title>
+</head>
+<body>
+
+<nav>
+    <div class="display-menu">
+        <h1><a href="../index.html">Menu</a></h1>
+        <h1><a href="../offer.html" class="active">Oferta</a></h1>
+        <h1><a href="../about_us.html">O nas</a></h1>
+        <h1><a href="../contact.html">Kontakt</a></h1>
+    </div>
+</nav>
+
+<div class="background"></div>
+
+<section class="car-section">
+
+    <div class="car-photo">
+        <img src="../../images/audi.jpg" alt="Audi RS7 Sportback">
+    </div>
+
+    <div class="car-details-column">
+
+        <div class="car-showcase">
+            <div class="car-details">
+                <h2>Audi RS7 Sportback</h2>
+                <ul>
+                    <li><i class="fa-solid fa-gauge-high"></i> 0–100 km/h: 3.7 s</li>
+                    <li><i class="fa-solid fa-speed"></i> Prędkość maks: 305 km/h</li>
+                    <li><i class="fa-solid fa-horse"></i> Moc: 610 KM</li>
+                    <li><i class="fa-solid fa-road"></i> Napęd: Quattro (4x4)</li>
+                    <li><i class="fa-solid fa-gas-pump"></i> Silnik: 4.0L V8 Twin Turbo</li>
+                    <li><i class="fa-solid fa-tachograph-digital"></i> Przebieg: 11 400 km</li>
+                    <li><i class="fa-solid fa-fire-flame-simple"></i> Spalanie: 18.7 l / 100 km</li>
+                </ul>
+                <p class="price">Cena: <span>3200 PLN / 24h</span></p>
+            </div>
+        </div>
+
+        <div class="car-info">
+            <h3>O AUCIE</h3>
+            <p>
+                Audi RS7 Sportback to perfekcyjne połączenie elegancji, mocy i technologii.
+                Napędzane 4.0-litrowym silnikiem V8 Twin Turbo o mocy 610 KM i napędem quattro,
+                oferuje błyskawiczne przyspieszenie i doskonałą trakcję w każdych warunkach.
+                Komfortowe wnętrze klasy premium i sportowy charakter sprawiają, że RS7 to auto,
+                które potrafi być zarówno limuzyną na co dzień, jak i bezkompromisową bestią na autostradzie.
+            </p>
+        </div>
+
+        <div class="availability">
+            <p>📅 Dostępność: <span class="status available">WOLNY </span></p>
+            <form action="../contact.html">
+                <button type="submit">Zarezerwuj termin</button>
+            </form>
+        </div>
+
+    </div>
+
+</section>
+
+<input type="checkbox" id="toggle-reviews" hidden>
+<label for="toggle-reviews" class="reviews-button">Opinie</label>
+
+<div class="reviews-panel">
+    <h2>Opinie klientów</h2>
+
+    <div class="review-card">
+        <i class="fa-solid fa-star"></i>
+        <p>„Audi RS7 to perfekcyjne połączenie komfortu i brutalnej mocy. Przyspieszenie wgniata w fotel, a wnętrze to czysty luksus.”</p>
+        <span>- Michał K.</span>
+    </div>
+
+    <div class="review-card">
+        <i class="fa-solid fa-star"></i>
+        <p>„Auto wygląda niesamowicie - elegancja i agresja w jednym. Prowadzenie RS7 to czysta przyjemność, nawet przy dużych prędkościach.”</p>
+        <span>- Aleksandra P.</span>
+    </div>
+
+    <div class="review-card">
+        <i class="fa-solid fa-star"></i>
+        <p>„Silnik V8 Twin Turbo robi swoje. Niesamowity dźwięk, świetna trakcja i płynność jazdy - RS7 to idealne auto na każdą okazję.”</p>
+        <span>- Krzysztof S.</span>
+    </div>
+
+    <div class="review-card">
+        <i class="fa-solid fa-star"></i>
+        <p>„Bardzo profesjonalna obsługa i perfekcyjny stan samochodu. RS7 prowadzi się jak marzenie, a komfort wnętrza jest topowy.”</p>
+        <span>- Bartosz W.</span>
+    </div>
+
+    <div class="review-card">
+        <i class="fa-solid fa-star"></i>
+        <p>„To nie jest zwykłe Audi - to potwór w garniturze. Cicha elegancja i potężna moc pod maską - absolutne 10/10.”</p>
+        <span>- Karolina S.</span>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-column footer-left">
+            <h2 class="footer-logo">DREAMCAR</h2>
+            <p><strong>Adres:</strong> Kraków, ul. Szerzyńska 55</p>
+            <p><strong>Telefon:</strong> 515 676 878</p>
+            <p><strong>E-mail:</strong> dreamcar@kontakt.pl</p>
+        </div>
+
+        <div class="footer-column footer-nav">
+            <h3>Menu</h3>
+            <a href="../index.html">Strona główna</a>
+            <a href="../offer.html">Oferta</a>
+            <a href="../about_us.html">O nas</a>
+            <a href="../contact.html">Kontakt</a>
+        </div>
+
+        <div class="footer-column newsletter">
+            <h3>Newsletter</h3>
+            <p>Wpisz swój adres e-mail, aby otrzymywać informacje o wydarzeniach!</p>
+            <form class="newsletter-form" action="../contact.html">
+                <input type="email" placeholder="Twój e-mail" required />
+                <button type="submit">Zapisz się</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DREAMCAR | Wszystkie prawa zastrzeżone</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+.background {
+    background: url("../images/aston.jpg") center 60% / cover no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    filter: brightness(0.45) blur(7px);
+    z-index: -2;
+}
+
+.display-menu a {
+    color: #aaaaaa;
+}
+
+.car-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    position: relative;
+    padding-top: 12vh;
+}
+
+.car-details-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1 1 350px;
+    max-width: min(700px, 70vw);
+    margin-top: -1rem;
+}
+
+.car-photo img {
+    width: 950px;
+    max-width: 90vw;
+    height: 90vh;
+    border-radius: 1.2rem;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: fadeIn 1s ease both;
+    object-fit: cover;
+}
+
+.car-photo img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 35px rgba(230, 57, 70, 0.6);
+}
+
+.car-showcase {
+    flex: 1 1 350px; /* elastyczna szerokość */
+    max-width: min(700px, 70vw);
+    padding: 2rem;
+    font-size: clamp(1rem, 1vw + 0.6rem, 1.2rem);
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    border-radius: 1.5rem;
+    box-shadow: 0 0 25px rgba(230, 57, 70, 0.35);
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    text-align: left;
+    animation: slideInFromRight 0.7s ease forwards;;
+}
+
+.car-showcase h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: #e63946;
+    margin-bottom: 1rem;
+}
+
+.car-showcase ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.car-showcase li {
+    margin: 0.6rem 0;
+    font-size: 1.1rem;
+}
+
+.car-showcase i {
+    color: #e63946;
+    margin-right: 8px;
+}
+
+.price {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+}
+
+.price span {
+    color: #e63946;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.car-info {
+    flex: 1 1 150px;
+    max-width: min(700px, 70vw);
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border-radius: 1.2rem;
+    padding: 1.8rem 2rem;
+    box-shadow: 0 0 25px rgba(230, 57, 70, 0.3);
+    color: #f5f5f5;
+    font-family: 'Oswald', sans-serif;
+    text-align: left;
+    border-left: 4px solid #e63946;
+    animation: slideInFromRight 0.7s ease forwards;
+}
+
+.car-info h3 {
+    color: #e63946;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+}
+
+.car-info p {
+    font-size: 1.05rem;
+    line-height: 1.6rem;
+    color: #ddd;
+}
+
+.availability {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 3rem;
+    border-radius: 1.2rem;
+    margin: 0 auto 6rem auto;
+    width: fit-content;
+    box-shadow: 0 0 25px rgba(230, 57, 70, 0.3);
+    font-family: 'Oswald', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 2;
+    animation: fadeIn 1s ease forwards;
+}
+
+.availability:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 35px rgba(230, 57, 70, 0.5);
+}
+
+.availability p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.availability .status {
+    font-weight: bold;
+    color: #27ae60;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.availability .status.unavailable {
+    color: #e63946;
+}
+
+.availability button {
+    background: #e63946;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    padding: 0.8rem 2rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+}
+
+.availability button:hover {
+    background: #ff4c4c;
+    transform: scale(1.05);
+}
+
+.reviews-button {
+    position: fixed;
+    top: 13%;
+    right: -0.2rem;
+    background: #e63946;
+    color: white;
+    padding: 1rem 0.5rem;
+    border-radius: 1rem 0 0 1rem;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.05rem;
+    box-shadow: 0 0 15px rgba(230, 57, 70, 0.6);
+    z-index: 5;
+    transition: background-color 0.3s ease, right 0.5s ease;
+}
+
+.reviews-button:hover {
+    background: #ff4c4c;
+}
+
+.reviews-panel {
+    position: fixed;
+    top: 0;
+    right: -330px;
+    width: 270px;
+    max-width: 81vw;
+    height: 100vh;
+    background: rgba(25, 25, 25, 0.98);
+    color: white;
+    padding: 2rem 1.2rem;
+    transition: right 0.5s ease;
+    overflow-y: auto;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 49;
+    scrollbar-width: thin;
+    scrollbar-color: #e63946 rgba(255,255,255,0.1);
+}
+
+#toggle-reviews:checked ~ .reviews-panel {
+    right: 0;
+}
+
+#toggle-reviews:checked + .reviews-button {
+    right: 19rem;
+    background: #8a1c1c;
+}
+
+.reviews-panel h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #e63946;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+    animation: slideInFromRight 0.7s ease forwards;
+    opacity: 0;
+}
+
+.review-card:nth-child(2) { animation-delay: 0.2s; }
+.review-card:nth-child(3) { animation-delay: 0.4s; }
+
+.review-card:hover {
+    box-shadow: 0 0 25px rgba(230, 57, 70, 0.6);
+    transform: translateY(-3px);
+}
+
+.review-card i {
+    color: #e63946;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.review-card p {
+    font-size: 1rem;
+    color: #eee;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    line-height: 1.4rem;
+}
+
+.review-card span {
+    color: #aaa;
+    font-size: 0.9rem;
+    display: block;
+    text-align: center;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1100px) {
+    .car-showcase {
+        text-align: center;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 992px) {
+    .car-showcase {
+
+        text-align: center;
+        max-width: 90%;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .car-info p {
+        text-align: center;
+    }
+
+    .car-showcase {
+        padding: 1.5rem 3rem;
+    }
+
+    .car-showcase h2 {
+        font-size: 1.8rem;
+    }
+}
+
+
+

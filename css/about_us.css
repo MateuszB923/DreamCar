@@ -1,0 +1,106 @@
+main {
+    background: linear-gradient(to bottom, #2a2a2a 0%, #0a0a0a 100%);
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    flex-direction: column;
+    overflow-x: hidden;
+    padding-top: 0;
+}
+
+.about-hero {
+    width: 100vw;
+    height: 80vh;
+    margin-top: -32vh;         /* żeby nie zachodziło na menu *!*/
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* żeby nie zostawała dziura od góry */
+    position: relative;
+
+}
+
+.about-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* środek zdjęcia */
+    display: block;
+    transform: translateY(3%); /*przesuniecie zdjecia zeby nie ucielo mi samochodu*/
+}
+
+.about-text {
+    width: 80%;
+    max-width: 1000px;
+    text-align: center;
+    margin: 4rem auto 2rem;
+}
+
+.about-text h1 {
+    font-family: 'Benne', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #e63946;
+}
+
+.about-text p {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    color: #e0e0e0;
+}
+
+.about-values {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.about-values h2 {
+    font-family: 'Benne', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.values-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.value-item {
+    background: rgba(255,255,255,0.05);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 2;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.value-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(230,57,70,0.6);
+}
+
+.value-item h3 {
+    font-size: 1.5rem;
+    color: #e63946;
+    margin-bottom: 1rem;
+}
+
+.value-item p {
+    color: #ddd;
+    font-size: 1rem;
+}
+
+.value-item:nth-child(1) { animation-delay: 0.2s; }
+.value-item:nth-child(2) { animation-delay: 0.2s; }
+.value-item:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
