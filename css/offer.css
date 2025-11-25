@@ -97,7 +97,7 @@ main {
 }
 
 .offer-card:nth-child(odd) {
-    margin-top: 2rem; /* zdjęcia 1, 3, 5 itd. lekko niżej POCZYTAC O TYMMMM */
+    margin-top: 2rem; /* zdjęcia 1, 3, 5 itd. lekko niżej */
 }
 
 .offer-card:nth-child(even) {
