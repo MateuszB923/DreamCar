@@ -22,6 +22,8 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+
+    //TODO sprawdzic czy tu nie trzeba transactional
     public Long register(RegisterRequest request){
         if (userRepository.existsByEmail(request.email())) {
             throw new IllegalArgumentException("This email is already taken");
