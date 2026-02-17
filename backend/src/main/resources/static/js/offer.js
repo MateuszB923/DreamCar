@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderCard(car) {
         const a = document.createElement("a");
         a.className = "offer-card";
-        a.href = mapToStaticDetailsPage(car);
+        a.href = `/html/car.html?id=${encodeURIComponent(car.id)}`;
 
         const img = document.createElement("img");
-        img.src = car.imageUrl;              // u Ciebie: "/images/aston.jpg" itd.
+        img.src = car.imageUrl;
         img.alt = `${car.brand} ${car.model}`;
 
         const info = document.createElement("div");
@@ -53,16 +53,4 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.round(n).toString();
     }
 
-    function mapToStaticDetailsPage(car) {
-        // masz statyczne strony dla 4 aut:
-        const key = `${(car.brand || "").toLowerCase()} ${(car.model || "").toLowerCase()}`;
-
-        if (key.includes("aston")) return "/html/cars/aston.html";
-        if (key.includes("porsche")) return "/html/cars/porsche.html";
-        if (key.includes("mercedes") || key.includes("amg")) return "/html/cars/benz.html";
-        if (key.includes("audi")) return "/html/cars/audi.html";
-
-        // fallback żeby nie było 404
-        return "/html/offer.html";
-    }
 });

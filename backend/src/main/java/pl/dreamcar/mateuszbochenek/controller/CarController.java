@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.dreamcar.mateuszbochenek.dto.CarResponse;
+import pl.dreamcar.mateuszbochenek.dto.CarReviewResponse;
 import pl.dreamcar.mateuszbochenek.service.CarService;
 
 import java.util.List;
@@ -28,4 +29,10 @@ public class CarController {
     public CarResponse getCarById(@PathVariable Long id) {
         return carService.findById(id);
     }
+
+    @GetMapping("/{id}/reviews")
+    public List<CarReviewResponse> getCarReviews(@PathVariable Long id) {
+        return carService.findReviewsByCarId(id);
+    }
+
 }

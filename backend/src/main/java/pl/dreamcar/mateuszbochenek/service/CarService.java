@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.dreamcar.mateuszbochenek.dto.CarCreateRequest;
 import pl.dreamcar.mateuszbochenek.dto.CarResponse;
+import pl.dreamcar.mateuszbochenek.dto.CarReviewResponse;
 import pl.dreamcar.mateuszbochenek.dto.CarUpdateRequest;
 import pl.dreamcar.mateuszbochenek.model.Car;
 import pl.dreamcar.mateuszbochenek.model.CarDescription;
@@ -12,6 +13,7 @@ import pl.dreamcar.mateuszbochenek.model.CarSpec;
 import pl.dreamcar.mateuszbochenek.repository.CarRepository;
 import pl.dreamcar.mateuszbochenek.mappers.CarMapper;
 import pl.dreamcar.mateuszbochenek.exception.NotFoundException;
+import pl.dreamcar.mateuszbochenek.repository.CarReviewRepository;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class CarService {
 
     private final CarRepository carRepository;
     private final CarMapper carMapper;
+    private final CarReviewRepository carReviewRepository;
 
     @Transactional(readOnly = true)
     public List<CarResponse> findAll() {
@@ -91,6 +94,17 @@ public class CarService {
     public void delete(Long id) {
         Car car = getCarOrThrow(id);
         carRepository.delete(car);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CarReviewResponse> findReviewsByCarId(Long carId) {
+        return carReviewRepository.findByCarIdOrderByIdAsc(carId).stream()
+                .map(r -> CarReviewResponse.builder()
+                        .id(r.getId())
+                        .author(r.getAuthor())
+                        .review(r.getReview())
+                        .build())
+                .toList();
     }
 
     private Car getCarOrThrow(Long id) {

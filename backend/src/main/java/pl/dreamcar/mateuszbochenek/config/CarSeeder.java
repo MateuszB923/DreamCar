@@ -3,6 +3,7 @@ package pl.dreamcar.mateuszbochenek.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import pl.dreamcar.mateuszbochenek.model.Car;
 import pl.dreamcar.mateuszbochenek.model.CarDescription;
@@ -13,6 +14,7 @@ import pl.dreamcar.mateuszbochenek.repository.CarRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Order(1)
 @Component
 @RequiredArgsConstructor
 @ConditionalOnProperty(prefix = "app.seed", name = "cars", havingValue = "true", matchIfMissing = true)
@@ -57,7 +59,7 @@ public class CarSeeder implements CommandLineRunner {
                         "Mercedes-AMG GT R to szczyt niemieckiej inżynierii – połączenie luksusu i bezkompromisowych osiągów. "
                                 + "Pod maską pracuje potężne V8 Biturbo o mocy 585 KM, przenoszone na tylną oś przez "
                                 + "7-biegową skrzynię AMG Speedshift. Agresywny wygląd, aktywna aerodynamika i dźwięk silnika "
-                                + "sprawiają, że GT R to nie tylko samochód — to emocje zamknięte w metalu."
+                                + "sprawiają, że GT R to nie tylko samochód - to emocje zamknięte w metalu."
                 ),
                 buildCar(
                         "Aston Martin", "DBS Superleggera", 2023,
