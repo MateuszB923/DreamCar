@@ -45,7 +45,8 @@ public class SecurityConfig {
                                 "/css/**","/js/**","/images/**","/html/**",
                                 "/fonts/**","/webfonts/**",
                                 "/api/auth/**",
-                                "/api/cars/**"
+                                "/api/cars/**",
+                                "/error"
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()

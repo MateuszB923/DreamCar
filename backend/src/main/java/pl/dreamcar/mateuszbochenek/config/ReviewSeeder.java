@@ -51,7 +51,7 @@ public class ReviewSeeder implements CommandLineRunner {
                 review("Bartosz W.","Wynajem przebiegł bezproblemowo, a auto wyglądało i brzmiało jak nowe. Jazda tym Mercedesem to czysta przyjemność.")
         ));
 
-        attachReviewsToCarModel(cars, "", List.of(
+        attachReviewsToCarModel(cars, "RS7 Sportback", List.of(
                 review("Aleksandra P.","Auto wygląda niesamowicie - elegancja i agresja w jednym. Prowadzenie RS7 to czysta przyjemność, nawet przy dużych prędkościach."),
                 review("Michał K.","Audi RS7 to perfekcyjne połączenie komfortu i brutalnej mocy. Przyspieszenie wgniata w fotel, a wnętrze to czysty luksus."),
                 review("Krzysztof S.","Silnik V8 Twin Turbo robi swoje. Niesamowity dźwięk, świetna trakcja i płynność jazdy - RS7 to idealne auto na każdą okazję."),

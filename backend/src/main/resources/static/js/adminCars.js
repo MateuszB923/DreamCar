@@ -1,17 +1,18 @@
 (function () {
-    function el(id) { return document.getElementById(id); }
+    function $(id) { return document.getElementById(id); }
 
     let editingId = null;
+    let carsCache = [];
 
     function readForm() {
         const spec = {
-            zeroToHundredSeconds: el("f-0100").value ? Number(el("f-0100").value) : null,
-            topSpeedKmh: el("f-top").value ? Number(el("f-top").value) : null,
-            powerHp: el("f-hp").value ? Number(el("f-hp").value) : null,
+            zeroToHundredSeconds: $("f-0100").value ? Number($("f-0100").value) : null,
+            topSpeedKmh: $("f-top").value ? Number($("f-top").value) : null,
+            powerHp: $("f-hp").value ? Number($("f-hp").value) : null,
             drivetrain: $("f-drive").value,
-            engine: el("f-engine").value,
-            mileageKm: el("f-mileage").value ? Number(el("f-mileage").value) : null,
-            fuelConsumptionL100: el("f-fuel").value ? Number(el("f-fuel").value) : null,
+            engine: $("f-engine").value,
+            mileageKm: $("f-mileage").value ? Number($("f-mileage").value) : null,
+            fuelConsumptionL100: $("f-fuel").value ? Number($("f-fuel").value) : null,
         };
 
         return {
@@ -53,12 +54,13 @@
         $("form-title").textContent = "Dodaj auto";
         $("btn-save").textContent = "Dodaj";
         $("btn-cancel").style.display = "none";
+        if (window.AdminReviews?.hide) window.AdminReviews.hide();
     }
 
-    function rowHtml(car) {
+    function rowHtml(car, index) {
         return `
       <tr>
-        <td>${car.id}</td>
+        <td>${index + 1}</td>
         <td>${car.brand} ${car.model}</td>
         <td>${car.year}</td>
         <td>${car.pricePerDay} PLN</td>
@@ -77,12 +79,13 @@
 
         try {
             const cars = await Api.fetchJson("/api/admin/cars", { auth: true });
+            carsCache = Array.isArray(cars) ? cars : [];
             tbody.innerHTML = cars.length
-                ? cars.map(rowHtml).join("")
+                ? cars.map((c, idx) => rowHtml(c, idx)).join("")
                 : `<tr><td colspan="6">Brak aut</td></tr>`;
         } catch (e) {
             if (e.status === 401 || e.status === 403) {
-                Auth.setStatus("Brak dostępu (zaloguj się jako ADMIN).", "error");
+                Auth.setStatus("Brak dostępu", "error");
                 Auth.logout();
                 Auth.showLoggedOutUI();
                 return;
@@ -91,25 +94,34 @@
         }
     }
 
+    function carLp(id) {
+        const idx = carsCache.findIndex(c => Number(c.id) === Number(id));
+        return idx >= 0 ? idx + 1 : null;
+    }
+
     async function onEdit(id) {
         try {
             const car = await Api.fetchJson(`/api/admin/cars/${id}`, { auth: true });
             editingId = id;
             fillForm(car);
-            $("form-title").textContent = `Edytuj auto #${id}`;
+            const lp = carLp(id);
+            $("form-title").textContent = lp ? `Edytuj auto #${lp}` : `Edytuj auto`;
             $("btn-save").textContent = "Zapisz";
             $("btn-cancel").style.display = "inline-block";
             Auth.setStatus("Tryb edycji", "info");
+            if (window.AdminReviews?.loadForCar) await window.AdminReviews.loadForCar(id);
         } catch (e) {
             Auth.setStatus(`Błąd pobrania auta: ${e.message}`, "error");
         }
     }
 
     async function onDelete(id) {
-        if (!confirm(`Usunąć auto #${id}?`)) return;
+        const lp = carLp(id);
+        if (!confirm(lp ? `Usunąć auto #${lp}?` : `Usunąć auto?`)) return;
+
         try {
             await Api.fetchJson(`/api/admin/cars/${id}`, { method: "DELETE", auth: true });
-            Auth.setStatus(`Usunięto auto #${id}`, "ok");
+            Auth.setStatus(lp ? `Usunięto auto #${lp}` : `Usunięto auto`, "ok");
             if (editingId === id) clearForm();
             await loadCars();
         } catch (e) {

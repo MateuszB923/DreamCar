@@ -1,14 +1,14 @@
 package pl.dreamcar.mateuszbochenek.service;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.dreamcar.mateuszbochenek.dto.CarCreateRequest;
-import pl.dreamcar.mateuszbochenek.dto.CarResponse;
-import pl.dreamcar.mateuszbochenek.dto.CarReviewResponse;
-import pl.dreamcar.mateuszbochenek.dto.CarUpdateRequest;
+import pl.dreamcar.mateuszbochenek.dto.*;
+import pl.dreamcar.mateuszbochenek.mappers.ReviewMapper;
 import pl.dreamcar.mateuszbochenek.model.Car;
 import pl.dreamcar.mateuszbochenek.model.CarDescription;
+import pl.dreamcar.mateuszbochenek.model.CarReview;
 import pl.dreamcar.mateuszbochenek.model.CarSpec;
 import pl.dreamcar.mateuszbochenek.repository.CarRepository;
 import pl.dreamcar.mateuszbochenek.mappers.CarMapper;
@@ -24,6 +24,7 @@ public class CarService {
     private final CarRepository carRepository;
     private final CarMapper carMapper;
     private final CarReviewRepository carReviewRepository;
+    private final ReviewMapper reviewMapper;
 
     @Transactional(readOnly = true)
     public List<CarResponse> findAll() {
@@ -53,7 +54,6 @@ public class CarService {
         Car saved = carRepository.save(car);
         return carMapper.toResponse(saved);
     }
-
 
     @Transactional
     public CarResponse update(Long id, CarUpdateRequest request) {
@@ -103,6 +103,42 @@ public class CarService {
                         .author(r.getAuthor())
                         .review(r.getReview())
                         .build())
+                .toList();
+    }
+
+    @Transactional
+    public CarReviewResponse addReview(Long carId, CarReviewCreateRequest request, Authentication auth) {
+        Car car = getCarOrThrow(carId);
+
+        String author = (auth != null ? auth.getName() : "anonymous");
+
+        CarReview saved = carReviewRepository.save(
+                CarReview.builder()
+                        .car(car)
+                        .author(author)
+                        .review(request.review())
+                        .build()
+        );
+
+        return CarReviewResponse.builder()
+                .id(saved.getId())
+                .author(saved.getAuthor())
+                .review(saved.getReview())
+                .build();
+    }
+
+    @Transactional
+    public void deleteReview(Long reviewId) {
+        if (!carReviewRepository.existsById(reviewId)) {
+            throw new NotFoundException("Review not found: " + reviewId);
+        }
+        carReviewRepository.deleteById(reviewId);
+    }
+
+    public List<CarReviewResponse> findAllReviews() {
+        return carReviewRepository.findAllByOrderByIdAsc()
+                .stream()
+                .map(reviewMapper::toReviewResponse)
                 .toList();
     }
 

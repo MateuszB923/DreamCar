@@ -67,6 +67,16 @@
 <div class="reviews-panel">
     <h2>Opinie klientów</h2>
     <div id="reviews-list"></div>
+
+    <div id="review-form-wrap" class="review-form-card" style="display:none;">
+        <textarea id="review-text" class="review-input" rows="4" placeholder="Napisz opinię..."></textarea>
+        <button id="btn-review" class="review-btn" type="button">DODAJ OPINIĘ</button>
+        <p id="review-error" class="review-error" style="display:none;"></p>
+    </div>
+
+    <p id="review-login-hint" style="margin-top: 12px;">
+        Zaloguj się, aby dodać opinię.
+    </p>
 </div>
 
 <footer class="footer">
@@ -101,6 +111,8 @@
     </div>
 </footer>
 
-<script src="../js/car.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/car.js"></script>
 </body>
 </html>

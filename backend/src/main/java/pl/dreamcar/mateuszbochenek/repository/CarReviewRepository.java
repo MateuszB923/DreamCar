@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface CarReviewRepository extends JpaRepository<CarReview, Long> {
     List<CarReview> findByCarIdOrderByIdAsc(Long carId);
+    List<CarReview> findAllByOrderByIdAsc();
 }

@@ -21,6 +21,11 @@
     <a class="active" href="/html/admin.html">ADMIN</a>
 </nav>
 
+<div class="desktop-only">
+    <h2>Panel admina jest dostępny tylko na komputerze</h2>
+    <p>Otwórz stronę na desktopie (min. 1000px szerokości).</p>
+</div>
+
 <main class="admin-main">
     <div class="admin-container">
 
@@ -179,7 +184,25 @@
                         </div>
                     </form>
                 </section>
-            </div>
+
+                <div class="card" id="reviews-card" style="display:none;">
+                    <h2 id="reviews-title">OPINIE</h2>
+
+                    <table class="table" id="reviews-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Autor</th>
+                            <th>Opinia</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </thead>
+                        <tbody id="reviews-tbody">
+                        <tr><td colspan="4">Wybierz auto (Edytuj), aby zobaczyć opinie.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
         </section>
     </div>
 </main>
@@ -191,5 +214,6 @@
 <script src="/js/api.js"></script>
 <script src="/js/auth.js"></script>
 <script src="/js/adminCars.js"></script>
+<script src="/js/adminReviews.js"></script>
 </body>
 </html>

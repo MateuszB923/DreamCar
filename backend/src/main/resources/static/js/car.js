@@ -8,40 +8,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        const carRes = await fetch(`/api/cars/${encodeURIComponent(id)}`);
-        if (!carRes.ok) throw new Error(`CAR HTTP ${carRes.status}`);
-        const car = await carRes.json();
+        const car = await fetchCar(id);
+        renderCar(car);
 
-        setText("page-title", `${car.brand} ${car.model}`);
-        setText("car-title", `${car.brand} ${car.model}`);
-        setText("car-price", `${formatPrice(car.pricePerDay)} PLN / 24h`);
+        await loadReviews(id);
 
-        const img = document.getElementById("car-img");
-        if (img) {
-            img.src = car.imageUrl || "../images/main.jpg";
-            img.alt = `${car.brand} ${car.model}`;
+        const loggedIn = !!(window.Api && Api.getToken && Api.getToken());
+        const formWrap = document.getElementById("review-form-wrap");
+        const hint = document.getElementById("review-login-hint");
+
+        if (loggedIn) {
+            if (formWrap) formWrap.style.display = "block";
+            if (hint) hint.style.display = "none";
+
+            const btn = document.getElementById("btn-review");
+            if (btn) btn.addEventListener("click", () => submitReview(id));
+        } else {
+            if (formWrap) formWrap.style.display = "none";
+            if (hint) hint.style.display = "block";
         }
-
-        setText("car-desc", car?.description ?? "");
-
-        setText("spec-0100", car?.zeroToHundredSeconds ?? "-");
-        setText("spec-top", car?.topSpeedKmh ?? "-");
-        setText("spec-hp", car?.powerHp ?? "-");
-        setText("spec-drive", car?.drivetrain ?? "-");
-        setText("spec-engine", car?.engine ?? "-");
-        setText("spec-mileage", formatIntWithSpaces(car?.mileageKm));
-        setText("spec-fuel", car?.fuelConsumptionL100 ?? "-");
-
-        const statusEl = document.getElementById("car-status");
-        if (statusEl) {
-            const available = !!car.available;
-            statusEl.textContent = available ? "WOLNY" : "CHWILOWO NIEDOSTĘPNY";
-            statusEl.classList.toggle("available", available);
-            statusEl.classList.toggle("unavailable", !available);
-        }
-
-        const reviews = await fetchReviews(id);
-        renderReviews(reviews);
 
     } catch (e) {
         console.error(e);
@@ -50,14 +35,95 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-async function fetchReviews(carId) {
+async function fetchCar(carId) {
+    const res = await fetch(`/api/cars/${encodeURIComponent(carId)}`);
+    if (!res.ok) throw new Error(`CAR HTTP ${res.status}`);
+    return await res.json();
+}
+
+function renderCar(car) {
+    setText("page-title", `${car.brand} ${car.model}`);
+    setText("car-title", `${car.brand} ${car.model}`);
+    setText("car-price", `${formatPrice(car.pricePerDay)} PLN / 24h`);
+
+    const img = document.getElementById("car-img");
+    if (img) {
+        img.src = car.imageUrl || "../images/main.jpg";
+        img.alt = `${car.brand} ${car.model}`;
+    }
+
+    setText("car-desc", car?.description ?? "");
+
+    setText("spec-0100", car?.zeroToHundredSeconds ?? "-");
+    setText("spec-top", car?.topSpeedKmh ?? "-");
+    setText("spec-hp", car?.powerHp ?? "-");
+    setText("spec-drive", car?.drivetrain ?? "-");
+    setText("spec-engine", car?.engine ?? "-");
+    setText("spec-mileage", formatIntWithSpaces(car?.mileageKm));
+    setText("spec-fuel", car?.fuelConsumptionL100 ?? "-");
+
+    const statusEl = document.getElementById("car-status");
+    if (statusEl) {
+        const available = !!car.available;
+        statusEl.textContent = available ? "WOLNY" : "CHWILOWO NIEDOSTĘPNY";
+        statusEl.classList.toggle("available", available);
+        statusEl.classList.toggle("unavailable", !available);
+    }
+}
+
+async function loadReviews(carId) {
+    const container = document.getElementById("reviews-list");
+    if (container) container.innerHTML = "<p>Ładowanie opinii...</p>";
+
     try {
-        const res = await fetch(`/api/cars/${encodeURIComponent(carId)}/reviews`);
-        if (!res.ok) return [];
-        return await res.json();
+        let reviews;
+        if (window.Api && Api.fetchJson) {
+            reviews = await Api.fetchJson(`/api/cars/${encodeURIComponent(carId)}/reviews`);
+        } else {
+            const res = await fetch(`/api/cars/${encodeURIComponent(carId)}/reviews`);
+            reviews = res.ok ? await res.json() : [];
+        }
+        renderReviews(reviews);
     } catch (e) {
         console.error("Reviews fetch failed", e);
-        return [];
+        renderReviews([]);
+    }
+}
+
+async function submitReview(carId) {
+    const textEl = document.getElementById("review-text");
+    const errEl = document.getElementById("review-error");
+    const text = (textEl?.value || "").trim();
+
+    if (errEl) {
+        errEl.style.display = "none";
+        errEl.textContent = "";
+    }
+
+    if (!text) return;
+
+    try {
+        await Api.fetchJson(`/api/cars/${encodeURIComponent(carId)}/reviews`, {
+            method: "POST",
+            auth: true,
+            body: { review: text }
+        });
+
+        if (textEl) textEl.value = "";
+        await loadReviews(carId);
+
+    } catch (e) {
+        console.error(e);
+        if (errEl) {
+            errEl.style.display = "block";
+            errEl.textContent = `Błąd dodania opinii: ${e.message}`;
+        } else {
+            alert(`Błąd dodania opinii: ${e.message}`);
+        }
+
+        if (e.status === 401 || e.status === 403) {
+            if (window.Auth && Auth.logout) Auth.logout();
+        }
     }
 }
 
@@ -67,22 +133,22 @@ function renderReviews(reviews) {
 
     if (!Array.isArray(reviews) || reviews.length === 0) {
         container.innerHTML = `
-      <div class="review-card">
-        <i class="fa-solid fa-star"></i>
-        <p>„Brak opinii dla tego auta.”</p>
-        <span>- DreamCar</span>
-      </div>
-    `;
+          <div class="review-card">
+            <i class="fa-solid fa-star"></i>
+            <p>„Brak opinii dla tego auta.”</p>
+            <span>- DreamCar</span>
+          </div>
+        `;
         return;
     }
 
     container.innerHTML = reviews.map(r => `
-    <div class="review-card">
-      <i class="fa-solid fa-star"></i>
-      <p>„${escapeHtml(r.review)}”</p>
-      <span>- ${escapeHtml(r.author)}</span>
-    </div>
-  `).join("");
+        <div class="review-card">
+          <i class="fa-solid fa-star"></i>
+          <p>„${escapeHtml(r.review)}”</p>
+          <span>- ${escapeHtml(r.author)}</span>
+        </div>
+    `).join("");
 }
 
 function setText(id, value) {

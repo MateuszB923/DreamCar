@@ -29,10 +29,4 @@ public class CarController {
     public CarResponse getCarById(@PathVariable Long id) {
         return carService.findById(id);
     }
-
-    @GetMapping("/{id}/reviews")
-    public List<CarReviewResponse> getCarReviews(@PathVariable Long id) {
-        return carService.findReviewsByCarId(id);
-    }
-
 }
