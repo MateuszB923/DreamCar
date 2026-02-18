@@ -35,5 +35,9 @@ public record CarUpdateRequest(
         CarSpecDto spec,
 
         @NotBlank
+        @Size(max = 120)
+        String title,
+
+        @NotBlank
         String description
 ) {}

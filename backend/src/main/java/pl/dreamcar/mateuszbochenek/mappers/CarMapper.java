@@ -31,6 +31,7 @@ public class CarMapper {
                 spec != null ? spec.getMileageKm() : null,
                 spec != null ? spec.getFuelConsumptionL100() : null,
 
+                desc != null ? desc.getTitle() : null,
                 desc != null ? desc.getDescription() : null
         );
     }
@@ -49,10 +50,11 @@ public class CarMapper {
                 .build();
     }
 
-    public CarDescription toDescriptionEntity(String description) {
-        if (description == null) return null;
+    public CarDescription toDescriptionEntity(String title, String description) {
+        if (title == null && description == null) return null;
 
         return CarDescription.builder()
+                .title(title)
                 .description(description)
                 .build();
     }

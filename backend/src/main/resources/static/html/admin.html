@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DreamCar • Admin</title>
+
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+<nav class="display-menu">
+    <a href="/index.html">MENU</a>
+    <a href="/html/offer.html">OFERTA</a>
+    <a href="/html/about_us.html">O NAS</a>
+    <a href="/html/contact.html">KONTAKT</a>
+    <a class="active" href="/html/admin.html">ADMIN</a>
+</nav>
+
+<main class="admin-main">
+    <div class="admin-container">
+
+        <div id="admin-status" class="status info">Panel admina</div>
+
+        <section id="admin-auth" class="card">
+            <h1 class="admin-title">Logowanie admina</h1>
+
+            <form id="login-form" class="form">
+                <label>
+                    Email
+                    <input id="login-email" type="email" placeholder="adres e-mail" required>
+                </label>
+
+                <label>
+                    Hasło
+                    <input id="login-password" type="password" placeholder="••••••••" required>
+                </label>
+
+                <button type="submit" class="btn primary">Zaloguj</button>
+            </form>
+        </section>
+
+        <section id="admin-panel" style="display:none;">
+            <div class="admin-header">
+                <h1 class="admin-title">Zarządzanie autami</h1>
+                <button id="btn-logout" class="btn danger">Wyloguj</button>
+            </div>
+
+            <div class="grid">
+                <section class="card">
+                    <h2 class="card-title">Lista aut</h2>
+
+                    <div class="table-wrap">
+                        <table id="cars-table" class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Auto</th>
+                                <th>Rok</th>
+                                <th>Cena / dzień</th>
+                                <th>Dostępne</th>
+                                <th>Akcje</th>
+                            </tr>
+                            </thead>
+                            <tbody id="cars-tbody">
+                            <tr><td colspan="6">Ładowanie...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h2 id="form-title" class="card-title">Dodaj auto</h2>
+
+                    <form id="car-form" class="form">
+                        <div class="form-row">
+                            <label>
+                                Marka
+                                <input id="f-brand" type="text" maxlength="50" required>
+                            </label>
+
+                            <label>
+                                Model
+                                <input id="f-model" type="text" maxlength="80" required>
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label>
+                                Rok
+                                <input id="f-year" type="number" min="1886" max="2030" required>
+                            </label>
+
+                            <label>
+                                Cena / dzień (PLN)
+                                <input id="f-price" type="number" step="10.0" min="10.0" required>
+                            </label>
+                        </div>
+
+                        <label>
+                            URL zdjęcia
+                            <input id="f-imageUrl" type="text" required>
+                        </label>
+
+                        <label class="check">
+                            <input id="f-available" type="checkbox" checked>
+                            Dostępne
+                        </label>
+
+                        <hr class="sep">
+
+                        <h3 class="sub-title">Specyfikacja</h3>
+
+                        <div class="form-row">
+                            <label>
+                                0–100 (s)
+                                <input id="f-0100" type="number" step="0.1" min="0.1">
+                            </label>
+
+                            <label>
+                                Vmax (km/h)
+                                <input id="f-top" type="number" min="1">
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label>
+                                Moc (HP)
+                                <input id="f-hp" type="number" min="1">
+                            </label>
+
+                            <label>
+                                Napęd
+                                <select id="f-drive" required>
+                                    <option value="">-- wybierz --</option>
+                                    <option value="RWD">RWD</option>
+                                    <option value="FWD">FWD</option>
+                                    <option value="AWD">AWD</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <label>
+                            Silnik
+                            <input id="f-engine" type="text" required>
+                        </label>
+
+                        <div class="form-row">
+                            <label>
+                                Przebieg (km)
+                                <input id="f-mileage" type="number" min="0">
+                            </label>
+
+                            <label>
+                                Spalanie (l/100)
+                                <input id="f-fuel" type="number" step="0.1" min="0.1">
+                            </label>
+                        </div>
+
+                        <hr class="sep">
+
+                        <label>
+                            Tytuł
+                            <input id="f-title" type="text" maxlength="120" required>
+                        </label>
+
+                        <label>
+                            Opis
+                            <textarea id="f-desc" rows="5" required></textarea>
+                        </label>
+
+                        <div class="actions">
+                            <button id="btn-save" type="submit" class="btn primary">Dodaj</button>
+                            <button id="btn-cancel" class="btn" style="display:none;">Anuluj</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-bottom">DreamCar • Admin</div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/adminCars.js"></script>
+</body>
+</html>

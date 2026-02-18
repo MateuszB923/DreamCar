@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const statusEl = document.getElementById("car-status");
         if (statusEl) {
             const available = !!car.available;
-            statusEl.textContent = available ? "WOLNY" : "CHWILOWO NIEDOSTEPNY";
+            statusEl.textContent = available ? "WOLNY" : "CHWILOWO NIEDOSTĘPNY";
             statusEl.classList.toggle("available", available);
             statusEl.classList.toggle("unavailable", !available);
         }

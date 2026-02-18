@@ -9,12 +9,24 @@ import pl.dreamcar.mateuszbochenek.dto.CarResponse;
 import pl.dreamcar.mateuszbochenek.dto.CarUpdateRequest;
 import pl.dreamcar.mateuszbochenek.service.CarService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/admin/cars")
 @RequiredArgsConstructor
 public class AdminCarController {
 
     private final CarService carService;
+
+    @GetMapping
+    public List<CarResponse> getAll() {
+        return carService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public CarResponse getOne(@PathVariable Long id) {
+        return carService.findById(id);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

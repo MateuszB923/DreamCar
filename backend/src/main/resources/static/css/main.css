@@ -116,3 +116,16 @@ main {
         width: 80%;
     }
 }
+
+.display-menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.display-menu a.active {
+    color: #e63946;
+}
+
+.display-menu a:hover {
+    color: #e63946;
+}

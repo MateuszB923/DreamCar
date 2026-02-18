@@ -17,7 +17,8 @@ public record CarCreateRequest(
 
         @NotNull
         @Min(1886)
-        @Max(2030) Integer year,
+        @Max(2030)
+        Integer year,
 
         @NotNull
         @DecimalMin("0.01")
@@ -33,6 +34,9 @@ public record CarCreateRequest(
         @Valid
         @NotNull
         CarSpecDto spec,
+
+        @NotBlank @Size(max = 120)
+        String title,
 
         @NotBlank
         String description

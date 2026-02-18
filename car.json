@@ -1,0 +1,18 @@
+{
+  "brand": "Opel",
+  "model": "Astra H",
+  "year": 2003,
+  "pricePerDay": 120,
+  "imageUrl": "/images/main.jpg",
+  "available": true,
+  "spec": {
+    "zeroToHundredSeconds": 20,
+    "topSpeedKmh": 160,
+    "powerHp": 80,
+    "drivetrain": "FWD",
+    "engine": "1.6 CDTI",
+    "mileageKm": 160000,
+    "fuelConsumptionL100": 4.7
+  },
+  "description": "Test"
+}

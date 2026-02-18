@@ -46,17 +46,14 @@ public class CarService {
                 .available(request.available() == null || request.available())
                 .build();
 
-        if (request.spec() != null) {
-            car.setCarSpec(carMapper.toSpecEntity(request.spec()));
-        }
+        car.setSpec(carMapper.toSpecEntity(request.spec()));
 
-        if (request.description() != null) {
-            car.setCarDescription(carMapper.toDescriptionEntity(request.description()));
-        }
+        car.setDescription(carMapper.toDescriptionEntity(request.title(), request.description()));
 
-        Car carToSave = carRepository.save(car);
-        return carMapper.toResponse(carToSave);
+        Car saved = carRepository.save(car);
+        return carMapper.toResponse(saved);
     }
+
 
     @Transactional
     public CarResponse update(Long id, CarUpdateRequest request) {
@@ -78,12 +75,14 @@ public class CarService {
             }
         }
 
-        if (request.description() != null) {
+        if (request.title() != null || request.description() != null) {
             CarDescription desc = car.getCarDescription();
+
             if (desc == null) {
-                car.setDescription(carMapper.toDescriptionEntity(request.description()));
+                car.setDescription(carMapper.toDescriptionEntity(request.title(), request.description()));
             } else {
-                desc.setDescription(request.description());
+                if (request.title() != null) desc.setTitle(request.title());
+                if (request.description() != null) desc.setDescription(request.description());
             }
         }
 

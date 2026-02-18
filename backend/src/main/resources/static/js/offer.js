@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (value == null) return "-";
         const n = typeof value === "number" ? value : Number(value);
         if (Number.isNaN(n)) return String(value);
-        // jak chcesz bez groszy:
         return Math.round(n).toString();
     }
 

@@ -21,5 +21,6 @@ public record CarResponse(
         Integer mileageKm,
         BigDecimal fuelConsumptionL100,
 
+        String title,
         String description
 ) {}
