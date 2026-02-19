@@ -28,14 +28,18 @@
     <h1 class="contact-header">Umów się i <br><span>spełnij swoje marzenia!</span></h1>
 
     <div class="contact-container">
-        <form class="contact-form">
+        <form class="contact-form" id="contact-form">
             <h2>Nasz formularz kontaktowy</h2>
-            <input type="text" placeholder="Imię i nazwisko" required />
-            <input type="email" placeholder="Adres e-mail" required />
-            <input type="text" placeholder="Temat" required />
-            <textarea placeholder="Wpisz wiadomość" required></textarea>
+            <div id="contact-msg" style="margin: 10px 0; font-size: 14px;"></div>
+
+            <input id="contact-name" type="text" placeholder="Imię i nazwisko" required />
+            <input id="contact-email" type="email" placeholder="Adres e-mail" required />
+            <input id="contact-subject" type="text" placeholder="Temat" required />
+            <textarea id="contact-message" placeholder="Wpisz wiadomość" required></textarea>
+
             <button type="submit">Wyślij</button>
         </form>
+
 
         <div class="map-box">
             <iframe
@@ -119,6 +123,10 @@
     </div>
 </footer>
 
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
 <script src="../js/navAuth.js"></script>
+<script src="../js/contact.js"></script>
+
 </body>
 </html>
