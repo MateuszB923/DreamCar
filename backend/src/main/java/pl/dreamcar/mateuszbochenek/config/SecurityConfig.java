@@ -3,6 +3,7 @@ package pl.dreamcar.mateuszbochenek.config;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,13 +42,16 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/","/index.html",
-                                "/css/**","/js/**","/images/**","/html/**",
-                                "/fonts/**","/webfonts/**",
-                                "/api/auth/**",
-                                "/api/cars/**",
+                                "/", "/index.html",
+                                "/css/**", "/js/**", "/images/**", "/html/**",
+                                "/fonts/**", "/webfonts/**",
                                 "/error"
                         ).permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/cars/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/cars/*/reviews").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/contact").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/reservations/**").authenticated()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

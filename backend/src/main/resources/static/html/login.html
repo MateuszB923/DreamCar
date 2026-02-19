@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="../css/font.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
+
+    <title>Logowanie</title>
+</head>
+<body>
+
+<nav>
+    <div class="display-menu">
+        <h1><a href="/html/index.html">Menu</a></h1>
+        <h1><a href="/html/offer.html">Oferta</a></h1>
+        <h1><a href="/html/about_us.html">O nas</a></h1>
+        <h1><a href="/html/contact.html">Kontakt</a></h1>
+    </div>
+</nav>
+
+<div class="background"></div>
+
+<section class="auth">
+    <div class="auth-card">
+        <h2 class="auth-title">Zaloguj się</h2>
+
+        <div id="msg" class="auth-msg"></div>
+
+        <form id="login-form" class="auth-form">
+            <label class="auth-label">Email</label>
+            <input id="email" class="auth-input" type="email" required />
+
+            <label class="auth-label">Hasło</label>
+            <input id="password" class="auth-input" type="password" required />
+
+            <button type="submit" class="auth-btn">Zaloguj</button>
+        </form>
+
+        <div class="auth-footer">
+            Nie masz konta?
+            <a id="to-register" href="register.html" class="auth-link">Zarejestruj się</a>
+        </div>
+    </div>
+</section>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/navAuth.js"></script>
+<script src="../js/login.js"></script>
+</body>
+</html>
