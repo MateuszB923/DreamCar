@@ -28,6 +28,32 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (hint) hint.style.display = "block";
         }
 
+        const reserveBtn = document.getElementById("reserve-btn");
+        const reserveMsg = document.getElementById("reserve-msg");
+
+        if (reserveBtn) {
+            if (car && car.available === false) {
+                reserveBtn.disabled = true;
+                if (reserveMsg) {
+                    reserveMsg.textContent = "Auto jest chwilowo niedostępne - rezerwacja wyłączona.";
+                    reserveMsg.style.color = "salmon";
+                }
+            } else {
+                reserveBtn.disabled = false;
+            }
+
+            reserveBtn.addEventListener("click", () => {
+                const target = `/html/reservations.html?carId=${encodeURIComponent(id)}`;
+
+                if (!loggedIn) {
+                    window.location.href = `/html/login.html?redirect=${encodeURIComponent(target)}`;
+                    return;
+                }
+
+                window.location.href = target;
+            });
+        }
+
     } catch (e) {
         console.error(e);
         alert("Nie udało się wczytać danych auta.");
