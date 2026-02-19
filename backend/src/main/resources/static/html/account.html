@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="../css/font.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/account.css" />
+    <title>Konto</title>
+</head>
+<body>
+
+<nav>
+    <div class="display-menu">
+        <h1><a href="/html/index.html">Menu</a></h1>
+        <h1><a href="/html/offer.html">Oferta</a></h1>
+        <h1><a href="/html/about_us.html">O nas</a></h1>
+        <h1><a href="/html/contact.html">Kontakt</a></h1>
+        <h1 id="nav-auth"></h1>
+    </div>
+</nav>
+
+<div class="background"></div>
+
+<main class="account-main">
+    <div class="account-container">
+
+        <div id="account-msg" class="status info" style="display:none;"></div>
+
+        <div class="account-top">
+            <h1 id="me-box" class="account-welcome">Ładowanie danych...</h1>
+        </div>
+
+        <div class="grid">
+            <section class="card">
+                <h3 class="card-title">Moje rezerwacje</h3>
+                <div id="reservations-box" class="card-body">Ładowanie...</div>
+            </section>
+
+            <section class="card">
+                <h3 class="card-title">Moje wiadomości</h3>
+                <div id="messages-box" class="card-body">Ładowanie...</div>
+            </section>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-column footer-left">
+            <h2 class="footer-logo">DREAMCAR</h2>
+            <p><strong>Adres:</strong> Kraków, ul. Szerzyńska 55</p>
+            <p><strong>Telefon:</strong> 515 676 878</p>
+            <p><strong>E-mail:</strong> dreamcar@kontakt.pl</p>
+        </div>
+
+        <div class="footer-column footer-nav">
+            <h3>Menu</h3>
+            <a href="./index.html">Strona główna</a>
+            <a href="./offer.html">Oferta</a>
+            <a href="./about_us.html">O nas</a>
+            <a href="./contact.html">Kontakt</a>
+        </div>
+
+        <div class="footer-column newsletter">
+            <h3>Newsletter</h3>
+            <p>Wpisz swój adres e-mail, aby otrzymywać informacje o wydarzeniach!</p>
+            <form class="newsletter-form" action="./contact.html">
+                <input type="email" placeholder="Twój e-mail" required />
+                <button type="submit">Zapisz się</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DREAMCAR | Wszystkie prawa zastrzeżone</p>
+    </div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/navAuth.js"></script>
+<script src="/js/account.js"></script>
+</body>
+</html>

@@ -29,4 +29,10 @@ public class ReservationController {
     public List<ReservationResponse> listRes(Authentication authentication) {
         return reservationService.listReservations(authentication.getName());
     }
+
+    @PatchMapping("/me/reservations/{id}/cancel")
+    public ResponseEntity<Void> cancel(@PathVariable Long id, Authentication authentication) {
+        reservationService.cancel(id, authentication.getName());
+        return ResponseEntity.noContent().build();
+    }
 }

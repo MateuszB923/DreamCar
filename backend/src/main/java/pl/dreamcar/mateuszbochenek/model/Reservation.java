@@ -46,6 +46,6 @@ public class Reservation {
     @PrePersist
     void prePersist() {
         if (createdAt == null) createdAt = Instant.now();
-        if (reservationStatus == null) reservationStatus = ReservationStatus.PENDING;
+        if (reservationStatus == null) reservationStatus = ReservationStatus.OCZEKUJACE;
     }
 }

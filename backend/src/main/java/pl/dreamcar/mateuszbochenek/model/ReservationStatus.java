@@ -1,5 +1,5 @@
 package pl.dreamcar.mateuszbochenek.model;
 
 public enum ReservationStatus {
-    PENDING, CONFIRMED, CANCELLED
+    OCZEKUJACE, POTWIERDZONE, ANULOWANE
 }

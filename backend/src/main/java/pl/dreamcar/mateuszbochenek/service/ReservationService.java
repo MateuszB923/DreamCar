@@ -48,7 +48,7 @@ public class ReservationService {
                 .reservationStartDate(request.startDate())
                 .reservationEndDate(request.endDate())
                 .note(request.note())
-                .reservationStatus(ReservationStatus.PENDING)
+                .reservationStatus(ReservationStatus.OCZEKUJACE)
                 .build());
 
         return savedReservation.getId();
@@ -70,5 +70,23 @@ public class ReservationService {
                         r.getCreatedAt()
                 ))
                 .toList();
+    }
+
+    @Transactional
+    public void cancel(Long reservationId, String emailJwt) {
+        User user = userRepository.findByEmail(emailJwt)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
+
+        Reservation reservation = reservationRepository.findByIdAndUserId(reservationId, user.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found"));
+
+        if (reservation.getReservationStatus() == ReservationStatus.ANULOWANE) return;
+
+        if (reservation.getReservationStartDate().isBefore(LocalDate.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nie można anulować rezerwacji z przeszłości");
+        }
+
+        reservation.setReservationStatus(ReservationStatus.ANULOWANE);
+        reservationRepository.save(reservation);
     }
 }
