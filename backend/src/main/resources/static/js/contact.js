@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // ✅ dopiero tu sprawdzamy login
         if (!Auth.isLoggedIn()) {
             window.location.href = `/html/login.html?redirect=${encodeURIComponent(redirectHere)}`;
             return;
@@ -34,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             await Api.fetchJson("/api/contact", { method: "POST", body: payload, auth: true });
-            setMsg("Wysłano ✅", true);
+            setMsg("Wysłano", true);
             form.reset();
         } catch (err) {
             if (err?.status === 401) {

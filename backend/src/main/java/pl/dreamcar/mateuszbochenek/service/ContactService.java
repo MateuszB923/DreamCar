@@ -5,10 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.dreamcar.mateuszbochenek.dto.ContactRequest;
+import pl.dreamcar.mateuszbochenek.dto.MessageResponse;
 import pl.dreamcar.mateuszbochenek.model.*;
 import pl.dreamcar.mateuszbochenek.repository.CarRepository;
 import pl.dreamcar.mateuszbochenek.repository.MessageRepository;
 import pl.dreamcar.mateuszbochenek.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +48,26 @@ public class ContactService {
                 .build());
 
         return savedMessage.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public List<MessageResponse> listMessages(String emailJwt) {
+
+        User user = userRepository.findByEmail(emailJwt)
+                .orElseThrow(() -> new RuntimeException("User not found: " + emailJwt));
+
+        return contactRepository.findByUserIdOrderByCreatedAtDesc(user.getId())
+                .stream()
+                .map(m -> new MessageResponse(
+                        m.getId(),
+                        m.getSubject(),
+                        m.getMessage(),
+                        m.getCategory().name(),
+                        m.getStatus().name(),
+                        m.getCreatedAt(),
+                        m.getCar() != null ? m.getCar().getId() : null
+                ))
+                .toList();
     }
 
     private ContactCategory parseCategory(String rawText) {
