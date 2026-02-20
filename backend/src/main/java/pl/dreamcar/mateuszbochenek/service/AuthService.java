@@ -63,7 +63,7 @@ public class AuthService {
         return new AuthResponse(token);
     }
 
-    private boolean isValidPassword(String p) {
+    public static boolean isValidPassword(String p) {
         if (p == null) return false;
         return p.length() >= 8
                 && p.matches(".*[A-Z].*")

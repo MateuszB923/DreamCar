@@ -26,6 +26,11 @@ public class AccountService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Aktualne hasło jest niepoprawne");
         }
 
+        if (!AuthService.isValidPassword(request.newPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Hasło musi mieć min. 8 znaków, 1 dużą literę, 1 cyfrę i 1 znak specjalny (np. !@#)");
+        }
+
         user.setPasswordHash(passwordEncoder.encode(request.newPassword()));
         userRepository.save(user);
     }
