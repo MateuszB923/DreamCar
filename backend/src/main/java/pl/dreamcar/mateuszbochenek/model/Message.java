@@ -18,9 +18,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //zobaczyc czy orphan i casdade, ale do przemyslenia czy po usunieciu usera ma usuwac tez wiadomosci, bo moze archiwum, ale tez zasmieca baze
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(nullable = false, length = 120)
@@ -40,7 +39,6 @@ public class Message {
     @Column(nullable = false, length = 30)
     private ContactCategory category;
 
-    //zobaczyc czy orphan i casdade, ale do przemyslenia czy po usunieciu usera ma usuwac tez wiadomosci, bo moze archiwum, ale tez zasmieca baze
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")
     private Car car;

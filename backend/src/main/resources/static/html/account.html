@@ -45,6 +45,40 @@
             </section>
         </div>
 
+        <section class="card">
+            <h3 class="card-title">Zmień hasło</h3>
+
+            <form id="pass-form" class="form">
+                <label>
+                    Aktualne hasło
+                    <input id="pass-current" type="text" required />
+                </label>
+                <label>
+                    Nowe hasło
+                    <input id="pass-new" type="text" required minlength="8" />
+                    <small class="muted">Hasło: min. 8 znaków, 1 duża litera, 1 cyfra, 1 znak specjalny (np. !@#)</small>
+                </label>
+                <button class="btn primary" type="submit">Zmień hasło</button>
+            </form>
+
+            <div id="pass-msg" class="status info" style="display:none;"></div>
+        </section>
+
+        <section class="card">
+            <h3 class="card-title">Usuń konto</h3>
+            <p class="muted">To działanie jest nieodwracalne.</p>
+
+            <form id="delete-form" class="form">
+                <label>
+                    Potwierdź hasło
+                    <input id="delete-pass" type="text" required />
+                </label>
+                <button class="btn danger" type="submit">Usuń konto</button>
+            </form>
+
+            <div id="delete-msg" class="status info" style="display:none;"></div>
+        </section>
+
     </div>
 </main>
 

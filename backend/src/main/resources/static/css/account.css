@@ -167,3 +167,43 @@
 .account-welcome .email{
     color: #e63946;
 }
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.form label{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.form input{
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    outline: none;
+}
+
+.form small{
+    display: block;
+    margin-top: 2px;
+    opacity: 0.85;
+}
+
+.form .btn{
+    align-self: center;
+    margin-top: 4px;
+}
+
+.account-container > .card{
+    margin-top: 1.6rem;
+}

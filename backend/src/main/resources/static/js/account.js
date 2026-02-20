@@ -121,11 +121,11 @@ function wireCancelButtons() {
 
                 setTopMsg("Rezerwacja anulowana", "ok");
                 await loadReservations();
-            } catch (e) {
-                console.error(e);
-                setTopMsg(e?.message || "Nie udało się anulować rezerwacji", "error");
+            } catch (error) {
+                console.error(error);
+                setTopMsg(error?.message || "Nie udało się anulować rezerwacji", "error");
 
-                if (e?.status === 401 || e?.status === 403) {
+                if (error?.status === 401 || error?.status === 403) {
                     Auth.logout();
                     const redirect = "/html/account.html";
                     window.location.href = `/html/login.html?redirect=${encodeURIComponent(redirect)}`;
@@ -167,6 +167,70 @@ async function loadMessages() {
   `).join("");
 
     if (box) box.innerHTML = cards;
+}
+
+wireChangePassword();
+wireDeleteAccount();
+
+function showBoxMsg(id, text, type = "info") {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = "block";
+    el.className = `status ${type}`;
+    el.textContent = text;
+}
+
+function wireChangePassword() {
+    const form = document.getElementById("pass-form");
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const currentPassword = document.getElementById("pass-current").value;
+        const newPassword = document.getElementById("pass-new").value;
+
+        try {
+            await Api.fetchJson("/api/me/change-password", {
+                method: "POST",
+                auth: true,
+                body: { currentPassword, newPassword }
+            });
+
+            showBoxMsg("pass-msg", "Hasło zmienione", "ok");
+            form.reset();
+
+        } catch (err) {
+            showBoxMsg("pass-msg", err?.message || "Błąd zmiany hasła", "error");
+        }
+    });
+}
+
+function wireDeleteAccount() {
+    const form = document.getElementById("delete-form");
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const password = document.getElementById("delete-pass").value;
+        const sure = confirm("Na pewno usunąć konto? Tej operacji nie da się cofnąć.");
+        if (!sure) return;
+
+        try {
+            await Api.fetchJson("/api/me", {
+                method: "DELETE",
+                auth: true,
+                body: { password }
+            });
+
+            Auth.logout();
+            showBoxMsg("delete-msg", "Konto usunięte", "ok");
+            window.location.href = "/html/index.html";
+
+        } catch (error) {
+            showBoxMsg("delete-msg", error?.message || "Błąd usuwania konta", "error");
+        }
+    });
 }
 
 function renderStatusBadge(statusRaw) {
