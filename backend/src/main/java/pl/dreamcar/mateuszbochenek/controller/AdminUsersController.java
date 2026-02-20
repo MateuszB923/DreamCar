@@ -2,6 +2,7 @@ package pl.dreamcar.mateuszbochenek.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pl.dreamcar.mateuszbochenek.dto.AdminUsersResponse;
 import pl.dreamcar.mateuszbochenek.dto.ResetPasswordResponse;
@@ -22,8 +23,8 @@ public class AdminUsersController {
     }
 
     @PatchMapping("/{id}/block")
-    public ResponseEntity<?> block(@PathVariable Long id) {
-        adminUsersService.blockUser(id);
+    public ResponseEntity<?> block(@PathVariable Long id, Authentication authentication) {
+        adminUsersService.blockUser(id, authentication.getName());
         return ResponseEntity.noContent().build();
     }
 
@@ -34,8 +35,8 @@ public class AdminUsersController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        adminUsersService.deleteUser(id);
+    public ResponseEntity<?> delete(@PathVariable Long id, Authentication authentication) {
+        adminUsersService.deleteUser(id, authentication.getName());
         return ResponseEntity.noContent().build();
     }
 

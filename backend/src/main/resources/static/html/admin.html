@@ -87,57 +87,46 @@
                                 Marka
                                 <input id="f-brand" type="text" maxlength="50" required>
                             </label>
-
                             <label>
                                 Model
                                 <input id="f-model" type="text" maxlength="80" required>
                             </label>
                         </div>
-
                         <div class="form-row">
                             <label>
                                 Rok
                                 <input id="f-year" type="number" min="1886" max="2030" required>
                             </label>
-
                             <label>
                                 Cena / dzień (PLN)
                                 <input id="f-price" type="number" step="10.0" min="10.0" required>
                             </label>
                         </div>
-
                         <label>
                             URL zdjęcia
                             <input id="f-imageUrl" type="text" required>
                         </label>
-
                         <label class="check">
                             <input id="f-available" type="checkbox" checked>
                             Dostępne
                         </label>
-
                         <hr class="sep">
-
                         <h3 class="sub-title">Specyfikacja</h3>
-
                         <div class="form-row">
                             <label>
                                 0–100 (s)
                                 <input id="f-0100" type="number" step="0.1" min="0.1">
                             </label>
-
                             <label>
                                 Vmax (km/h)
                                 <input id="f-top" type="number" min="1">
                             </label>
                         </div>
-
                         <div class="form-row">
                             <label>
                                 Moc (HP)
                                 <input id="f-hp" type="number" min="1">
                             </label>
-
                             <label>
                                 Napęd
                                 <select id="f-drive" required>
@@ -148,36 +137,29 @@
                                 </select>
                             </label>
                         </div>
-
                         <label>
                             Silnik
                             <input id="f-engine" type="text" required>
                         </label>
-
                         <div class="form-row">
                             <label>
                                 Przebieg (km)
                                 <input id="f-mileage" type="number" min="0">
                             </label>
-
                             <label>
                                 Spalanie (l/100)
                                 <input id="f-fuel" type="number" step="0.1" min="0.1">
                             </label>
                         </div>
-
                         <hr class="sep">
-
                         <label>
                             Tytuł
                             <input id="f-title" type="text" maxlength="120" required>
                         </label>
-
                         <label>
                             Opis
                             <textarea id="f-desc" rows="5" required></textarea>
                         </label>
-
                         <div class="actions">
                             <button id="btn-save" type="submit" class="btn primary">Dodaj</button>
                             <button id="btn-cancel" class="btn" style="display:none;">Anuluj</button>
@@ -204,6 +186,29 @@
                 </div>
             </div>
 
+            <section class="card" id="users-card">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                    <h2 class="card-title" style="margin:0;">Użytkownicy</h2>
+                    <button id="btn-users-refresh" class="btn">Odśwież</button>
+                </div>
+
+                <div class="table-wrap" style="margin-top: 0.8rem;">
+                    <table class="table" id="users-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Rola</th>
+                            <th>Status</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                        <tr><td colspan="5">Ładowanie...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </section>
     </div>
 </main>
@@ -216,5 +221,6 @@
 <script src="/js/auth.js"></script>
 <script src="/js/adminCars.js"></script>
 <script src="/js/adminReviews.js"></script>
+<script src="/js/adminUsers.js"></script>
 </body>
 </html>

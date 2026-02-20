@@ -124,6 +124,7 @@
             Auth.setStatus(lp ? `Usunięto auto #${lp}` : `Usunięto auto`, "ok");
             if (editingId === id) clearForm();
             await loadCars();
+            if (window.AdminUsers?.load) await window.AdminUsers.load();
         } catch (e) {
             Auth.setStatus(`Błąd usuwania: ${e.message}`, "error");
         }
@@ -147,10 +148,10 @@
         try {
             if (editingId == null) {
                 await Api.fetchJson("/api/admin/cars", { method: "POST", body: payload, auth: true });
-                Auth.setStatus("Dodano auto ✅", "ok");
+                Auth.setStatus("Dodano auto", "ok");
             } else {
                 await Api.fetchJson(`/api/admin/cars/${editingId}`, { method: "PATCH", body: payload, auth: true });
-                Auth.setStatus("Zapisano zmiany ✅", "ok");
+                Auth.setStatus("Zapisano zmiany", "ok");
             }
 
             clearForm();
@@ -178,9 +179,10 @@
 
             try {
                 await Auth.login(email, password);
-                Auth.setStatus("Zalogowano ✅", "ok");
+                Auth.setStatus("Zalogowano", "ok");
                 Auth.showLoggedInUI();
                 await loadCars();
+                if (window.AdminUsers?.load) await window.AdminUsers.load();
             } catch (err) {
                 Auth.setStatus(`Błąd logowania: ${err.message}`, "error");
             }
@@ -198,6 +200,7 @@
         if (Auth.isLoggedIn()) {
             Auth.showLoggedInUI();
             void loadCars();
+            if (window.AdminUsers?.load) void window.AdminUsers.load();
         } else {
             Auth.showLoggedOutUI();
         }

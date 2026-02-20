@@ -1,9 +1,11 @@
 package pl.dreamcar.mateuszbochenek.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 import pl.dreamcar.mateuszbochenek.dto.AdminUsersResponse;
 import pl.dreamcar.mateuszbochenek.dto.ResetPasswordResponse;
 import pl.dreamcar.mateuszbochenek.exception.NotFoundException;
@@ -30,8 +32,11 @@ public class AdminUsersService {
     }
 
     @Transactional
-    public void blockUser(Long id) {
+    public void blockUser(Long id, String adminEmail) {
         User user = getUserOrThrow(id);
+        if (user.getEmail().equalsIgnoreCase(adminEmail)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nie możesz zablokować swojego konta");
+        }
         user.setLocked(true);
         userRepository.save(user);
     }
@@ -44,8 +49,11 @@ public class AdminUsersService {
     }
 
     @Transactional
-    public void deleteUser(Long id) {
+    public void deleteUser(Long id, String adminEmail) {
         User user = getUserOrThrow(id);
+        if (user.getEmail().equalsIgnoreCase(adminEmail)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nie możesz usunąć swojego konta");
+        }
         userRepository.delete(user);
     }
 
