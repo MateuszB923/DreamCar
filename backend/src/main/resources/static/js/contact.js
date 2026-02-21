@@ -20,12 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const category = document.getElementById("contact-category").value.trim();
+        if (!category) {
+            setMsg("Wybierz kategorię", false);
+            return;
+        }
+
         const payload = {
             name: document.getElementById("contact-name").value.trim(),
             email: document.getElementById("contact-email").value.trim(),
             subject: document.getElementById("contact-subject").value.trim(),
             message: document.getElementById("contact-message").value.trim(),
-            category: carId ? "RESERVATION" : "GENERAL",
+            category,
             carId
         };
 

@@ -35,6 +35,16 @@
             <input id="contact-name" type="text" placeholder="Imię i nazwisko" required />
             <input id="contact-email" type="email" placeholder="Adres e-mail" required />
             <input id="contact-subject" type="text" placeholder="Temat" required />
+            <label>
+                Kategoria
+                <select id="contact-category" required>
+                    <option value="">-- wybierz --</option>
+                    <option value="GENERAL">Ogólne</option>
+                    <option value="RESERVATION">Rezerwacja</option>
+                    <option value="QUESTION">Pytanie</option>
+                    <option value="COMPLAINT">Reklamacja</option>
+                </select>
+            </label>
             <textarea id="contact-message" placeholder="Wpisz wiadomość" required></textarea>
 
             <button type="submit">Wyślij</button>

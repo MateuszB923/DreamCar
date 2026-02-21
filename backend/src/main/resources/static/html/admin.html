@@ -209,9 +209,72 @@
                     </table>
                 </div>
             </section>
+
+            <section class="card" id="messages-card" style="display:none;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                    <h2 class="card-title" style="margin:0;">Wiadomości</h2>
+                    <div style="display:flex; gap:0.6rem; align-items:center;">
+                        <select id="msg-status" style="min-width: 180px;">
+                            <option value="">WSZYSTKIE</option>
+                            <option value="NEW">NOWE</option>
+                            <option value="READ">PRZECZYTANE</option>
+                            <option value="ARCHIVED">ZARCHIWIZOWANE</option>
+                        </select>
+                        <button id="btn-messages-refresh" class="btn">Odśwież</button>
+                    </div>
+                </div>
+
+                <div class="table-wrap" style="margin-top:0.8rem;">
+                    <table class="table" id="messages-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>User</th>
+                            <th>Temat</th>
+                            <th>Kategoria</th>
+                            <th>Status</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </thead>
+                        <tbody id="messages-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
         </section>
     </div>
 </main>
+
+<div id="msg-modal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="msg-modal-title">
+        <div class="modal-header">
+            <h2 id="msg-modal-title" class="modal-title">Wiadomość</h2>
+            <button id="msg-modal-close" class="btn danger" type="button">Zamknij</button>
+        </div>
+
+        <div class="modal-meta">
+            <div><span class="muted">Data:</span> <span id="m-created"></span></div>
+            <div><span class="muted">Od:</span> <span id="m-from"></span></div>
+            <div><span class="muted">Użytkownik:</span> <span id="m-user"></span></div>
+            <div><span class="muted">Kategoria:</span> <span id="m-cat"></span></div>
+            <div><span class="muted">Temat:</span> <span id="m-subject"></span></div>
+            <div><span class="muted">Status:</span> <span id="m-status"></span></div>
+        </div>
+
+        <div class="modal-body">
+            <pre id="m-message" class="modal-message"></pre>
+        </div>
+
+        <div class="modal-actions">
+            <button id="m-btn-read" class="btn primary" type="button">Oznacz jako przeczytane</button>
+            <button id="m-btn-arch" class="btn danger" type="button">Archiwizuj</button>
+        </div>
+    </div>
+</div>
 
 <footer class="footer">
     <div class="footer-bottom">DreamCar • Admin</div>
@@ -222,5 +285,6 @@
 <script src="/js/adminCars.js"></script>
 <script src="/js/adminReviews.js"></script>
 <script src="/js/adminUsers.js"></script>
+<script src="/js/adminMessages.js"></script>
 </body>
 </html>

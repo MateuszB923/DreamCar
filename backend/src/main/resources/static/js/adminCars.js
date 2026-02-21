@@ -4,6 +4,17 @@
     let editingId = null;
     let carsCache = [];
 
+    function toggleMessagesCard(show) {
+        const card = document.getElementById("messages-card");
+        if (!card) return;
+        card.style.display = show ? "block" : "none";
+
+        if (!show) {
+            const tbody = document.getElementById("messages-tbody");
+            if (tbody) tbody.innerHTML = `<tr><td colspan="7">Zaloguj się jako admin, aby wczytać wiadomości.</td></tr>`;
+        }
+    }
+
     function readForm() {
         const spec = {
             zeroToHundredSeconds: $("f-0100").value ? Number($("f-0100").value) : null,
@@ -39,7 +50,7 @@
         $("f-0100").value = car.zeroToHundredSeconds ?? "";
         $("f-top").value = car.topSpeedKmh ?? "";
         $("f-hp").value = car.powerHp ?? "";
-        $("f-drive").value = car.drivetrain ?? "";  // enum
+        $("f-drive").value = car.drivetrain ?? "";
         $("f-engine").value = car.engine ?? "";
         $("f-mileage").value = car.mileageKm ?? "";
         $("f-fuel").value = car.fuelConsumptionL100 ?? "";
@@ -88,6 +99,7 @@
                 Auth.setStatus("Brak dostępu", "error");
                 Auth.logout();
                 Auth.showLoggedOutUI();
+                toggleMessagesCard(false);
                 return;
             }
             tbody.innerHTML = `<tr><td colspan="6">Błąd: ${e.message}</td></tr>`;
@@ -125,6 +137,7 @@
             if (editingId === id) clearForm();
             await loadCars();
             if (window.AdminUsers?.load) await window.AdminUsers.load();
+            if (window.AdminMessages?.load) await window.AdminMessages.load();
         } catch (e) {
             Auth.setStatus(`Błąd usuwania: ${e.message}`, "error");
         }
@@ -181,8 +194,11 @@
                 await Auth.login(email, password);
                 Auth.setStatus("Zalogowano", "ok");
                 Auth.showLoggedInUI();
+                toggleMessagesCard(true);
+
                 await loadCars();
                 if (window.AdminUsers?.load) await window.AdminUsers.load();
+                if (window.AdminMessages?.load) await window.AdminMessages.load();
             } catch (err) {
                 Auth.setStatus(`Błąd logowania: ${err.message}`, "error");
             }
@@ -192,6 +208,7 @@
             Auth.logout();
             Auth.setStatus("Wylogowano", "info");
             Auth.showLoggedOutUI();
+            toggleMessagesCard(false);
             clearForm();
         });
     }
@@ -199,10 +216,14 @@
     function init() {
         if (Auth.isLoggedIn()) {
             Auth.showLoggedInUI();
+            toggleMessagesCard(true);
+
             void loadCars();
             if (window.AdminUsers?.load) void window.AdminUsers.load();
+            if (window.AdminMessages?.load) void window.AdminMessages.load();
         } else {
             Auth.showLoggedOutUI();
+            toggleMessagesCard(false);
         }
 
         bindAuth();
@@ -218,4 +239,4 @@
     }
 
     document.addEventListener("DOMContentLoaded", init);
-})();
+}) ();

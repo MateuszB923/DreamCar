@@ -223,3 +223,89 @@ textarea { resize: vertical; }
 #admin-panel > .grid {
     margin-bottom: 1.6rem;
 }
+
+#admin-panel > .card {
+    margin-top: 1.6rem;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+}
+
+.modal-card {
+    position: relative;
+    width: min(900px, 92vw);
+    max-height: 86vh;
+    overflow: hidden;
+    margin: 10vh auto 0;
+    background: rgba(0,0,0,0.75);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 1.2rem;
+    box-shadow: 0 0 35px rgba(0,0,0,0.55);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.modal-title {
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1rem;
+    color: #e63946;
+    font-size: 2rem;
+}
+
+.modal-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 1rem;
+    padding: 0.9rem 1.2rem;
+    font-family: 'Oswald', sans-serif;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+@media (max-width: 700px) {
+    .modal-meta { grid-template-columns: 1fr; }
+}
+
+.muted { color: rgba(255,255,255,0.65); }
+
+.modal-body {
+    padding: 1rem 1.2rem;
+    overflow: auto;
+}
+
+.modal-message {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: #fff;
+}
+
+.modal-actions {
+    display:flex;
+    justify-content:flex-end;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    border-top: 1px solid rgba(255,255,255,0.10);
+}
