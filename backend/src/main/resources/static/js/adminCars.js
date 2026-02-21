@@ -15,6 +15,17 @@
         }
     }
 
+    function toggleReservationsCard(show) {
+        const card = document.getElementById("reservations-card");
+        if (!card) return;
+        card.style.display = show ? "block" : "none";
+
+        if (!show) {
+            const tbody = document.getElementById("reservations-tbody");
+            if (tbody) tbody.innerHTML = `<tr><td colspan="8">Zaloguj się jako admin, aby wczytać rezerwacje.</td></tr>`;
+        }
+    }
+
     function readForm() {
         const spec = {
             zeroToHundredSeconds: $("f-0100").value ? Number($("f-0100").value) : null,
@@ -100,6 +111,7 @@
                 Auth.logout();
                 Auth.showLoggedOutUI();
                 toggleMessagesCard(false);
+                toggleReservationsCard(false);
                 return;
             }
             tbody.innerHTML = `<tr><td colspan="6">Błąd: ${e.message}</td></tr>`;
@@ -136,8 +148,10 @@
             Auth.setStatus(lp ? `Usunięto auto #${lp}` : `Usunięto auto`, "ok");
             if (editingId === id) clearForm();
             await loadCars();
+
             if (window.AdminUsers?.load) await window.AdminUsers.load();
             if (window.AdminMessages?.load) await window.AdminMessages.load();
+            if (window.AdminReservations?.load) await window.AdminReservations.load();
         } catch (e) {
             Auth.setStatus(`Błąd usuwania: ${e.message}`, "error");
         }
@@ -194,11 +208,16 @@
                 await Auth.login(email, password);
                 Auth.setStatus("Zalogowano", "ok");
                 Auth.showLoggedInUI();
+
+                // pokazujemy admin sekcje
                 toggleMessagesCard(true);
+                toggleReservationsCard(true);
 
                 await loadCars();
+
                 if (window.AdminUsers?.load) await window.AdminUsers.load();
                 if (window.AdminMessages?.load) await window.AdminMessages.load();
+                if (window.AdminReservations?.load) await window.AdminReservations.load();
             } catch (err) {
                 Auth.setStatus(`Błąd logowania: ${err.message}`, "error");
             }
@@ -208,7 +227,10 @@
             Auth.logout();
             Auth.setStatus("Wylogowano", "info");
             Auth.showLoggedOutUI();
+
             toggleMessagesCard(false);
+            toggleReservationsCard(false);
+
             clearForm();
         });
     }
@@ -216,14 +238,19 @@
     function init() {
         if (Auth.isLoggedIn()) {
             Auth.showLoggedInUI();
+
             toggleMessagesCard(true);
+            toggleReservationsCard(true);
 
             void loadCars();
+
             if (window.AdminUsers?.load) void window.AdminUsers.load();
             if (window.AdminMessages?.load) void window.AdminMessages.load();
+            if (window.AdminReservations?.load) void window.AdminReservations.load();
         } else {
             Auth.showLoggedOutUI();
             toggleMessagesCard(false);
+            toggleReservationsCard(false);
         }
 
         bindAuth();
@@ -239,4 +266,4 @@
     }
 
     document.addEventListener("DOMContentLoaded", init);
-}) ();
+})();

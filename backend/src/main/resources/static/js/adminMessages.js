@@ -66,7 +66,6 @@
                 ? cache.map((m, idx) => rowHtml(m, idx)).join("")
                 : `<tr><td colspan="7">Brak wiadomości</td></tr>`;
 
-            Auth.setStatus("Wiadomości załadowane", "ok");
         } catch (e) {
             if (e.status === 401 || e.status === 403) {
                 tbody.innerHTML = `<tr><td colspan="7">Brak dostępu (ADMIN).</td></tr>`;

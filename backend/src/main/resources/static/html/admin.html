@@ -26,7 +26,7 @@
     <p>Otwórz stronę na desktopie (min. 1000px szerokości).</p>
 </div>
 
-<main class="admin-main">
+<main class="admin-main admin-app">
     <div class="admin-container">
 
         <div id="admin-status" class="status info">Panel admina</div>
@@ -243,6 +243,42 @@
                 </div>
             </section>
 
+            <section class="card" id="reservations-card" style="display:none;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                    <h2 class="card-title" style="margin:0;">Rezerwacje</h2>
+
+                    <div style="display:flex; gap:0.6rem; align-items:center;">
+                        <select id="res-status" style="min-width: 200px;">
+                            <option value="">WSZYSTKIE</option>
+                            <option value="OCZEKUJACE">OCZEKUJACE</option>
+                            <option value="POTWIERDZONE">POTWIERDZONE</option>
+                            <option value="ANULOWANE">ANULOWANE</option>
+                        </select>
+
+                        <input id="res-carId" type="number" min="1" placeholder="carId" style="width:120px;">
+                        <button id="btn-res-refresh" class="btn">Odśwież</button>
+                    </div>
+                </div>
+
+                <div class="table-wrap" style="margin-top:0.8rem;">
+                    <table class="table" id="reservations-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>User</th>
+                            <th>Auto</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Status</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </thead>
+                        <tbody id="reservations-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </section>
     </div>
 </main>
@@ -286,5 +322,6 @@
 <script src="/js/adminReviews.js"></script>
 <script src="/js/adminUsers.js"></script>
 <script src="/js/adminMessages.js"></script>
+<script src="/js/adminReservations.js"></script>
 </body>
 </html>
