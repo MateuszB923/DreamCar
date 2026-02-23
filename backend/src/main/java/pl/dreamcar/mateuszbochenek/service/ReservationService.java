@@ -16,6 +16,7 @@ import pl.dreamcar.mateuszbochenek.repository.ReservationRepository;
 import pl.dreamcar.mateuszbochenek.repository.UserRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -29,6 +30,8 @@ public class ReservationService {
     @Transactional
     public Long create(ReservationCreateRequest request, String emailJwt) {
 
+        Collection<ReservationStatus> activeReservations = List.of(ReservationStatus.OCZEKUJACE, ReservationStatus.POTWIERDZONE);
+
         if (request.endDate().isBefore(request.startDate())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data końcowa nie może być wcześniejsza niż początkowa");
         }
@@ -41,6 +44,10 @@ public class ReservationService {
 
         Car car = carRepository.findById(request.carId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));
+
+        if (reservationRepository.existsOverlap(car.getId(), activeReservations, request.startDate(), request.endDate())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Auto jest już zarezerwowane w tym terminie");
+        }
 
         Reservation savedReservation = reservationRepository.save(Reservation.builder()
                 .user(user)
