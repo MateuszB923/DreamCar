@@ -219,3 +219,10 @@ Backend: `Ctrl + C`
 Baza danych:
 
 `docker compose down`
+
+---
+
+## Schemat Bazy Danych
+
+<img width="1269" height="706" alt="obraz" src="https://github.com/user-attachments/assets/62801567-03f1-42bb-9b30-e2509a37b534" />
+
