@@ -83,7 +83,7 @@ zachowując podejście **REST API**, walidację danych, obsługę błędów oraz
     - `lombok` (uzyty został w celu redukcji boilerplate: gettery/settery/builder)
 - **Konfiguracja aplikacji**
   - `application.properties` zawiera konfigurację bazy danych (URL, user, hasło), ustawienia Hibernate oraz parametry JWT,
-  - część konfiguracji (np. konto admina seedowane przy starcie) korzysta ze zmiennych środowiskowych (np. `ADMIN_EMAIL`, `ADMIN_PASSWORD`). ???????????????????????
+  - część konfiguracji (np. konto admina seedowane przy starcie) korzysta ze zmiennych środowiskowych (`ADMIN_EMAIL`, `ADMIN_PASSWORD`).
 
 ---
 
